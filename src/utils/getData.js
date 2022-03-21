@@ -4,6 +4,12 @@ import {
   getUserPerformance,
 } from "./data";
 import { getUserActivity } from "./dataMocked";
+/**
+ * 
+ * @param {string} type 
+ * @param {number} id 
+ * @returns {Array}
+ */
 
 export const getData = async (type, id) => {
   let data = [];

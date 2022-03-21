@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { getUserAverageSessions } from "../utils/data";
+import { getData } from '../utils/getData';
 import { useParams } from "react-router";
 import {
   ResponsiveContainer,
@@ -42,8 +42,8 @@ function UserAverageSessions() {
   const { id } = useParams();
 
   useEffect(() => {
-    const getData = async () => {
-      const request = await getUserAverageSessions(id);
+    const getAverageSessions = async () => {
+      const request = await getData("USER_AVERAGE_SESSIONS",id);
       if (!request) return alert("data error");
       const formatData = request.data.sessions.map((data) => {
         switch (data.day) {
@@ -67,7 +67,7 @@ function UserAverageSessions() {
       });
       setData(formatData);
     };
-    getData();
+    getAverageSessions();
   }, [id]);
   if (data.length === 0) return null;
 

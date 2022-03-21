@@ -1,8 +1,9 @@
 import React, {useState,useEffect} from 'react';
 import styled from 'styled-components';
-import { getUserPerformance } from '../utils/data';
+import { getData } from '../utils/getData';
 import { useParams } from 'react-router';
 import {Radar,RadarChart,PolarGrid,PolarAngleAxis,ResponsiveContainer} from "recharts";
+
 
 const Container = styled.div`
     position: relative;
@@ -22,8 +23,8 @@ function UserPerformance() {
 	const {id} = useParams();
 
     useEffect(() => {
-		const getData = async () => {
-			const request = await getUserPerformance(id);
+		const getPerformance = async () => {
+			const request = await getData("USER_PERFORMANCE",id);
 			if (!request) return alert('data error');
 			const formatData = request.data.data.map((data) => {
 				switch (data.kind) {
@@ -45,7 +46,7 @@ function UserPerformance() {
 			});
 			setData(formatData);
 		};
-		getData();
+		getPerformance();
 	}, [id]);
 	if (data.length === 0) return null;
 	
